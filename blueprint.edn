@@ -1,0 +1,11 @@
+[{:itonami.blueprint/social-impact [:worker-safety :hazard-mitigation :labor-continuity]
+  :itonami.blueprint/domain :mining/labor-coordination
+  :itonami.blueprint/required-technologies [:robotics :identity :audit-ledger]
+  :itonami.blueprint/isco-08 "9311"
+  :itonami.blueprint/name "Mining and Quarrying Labor Coordination Practice"
+  :itonami.blueprint/governor :mining-labor-governor
+  :itonami.blueprint/robotics true
+  :db/id -1
+  :itonami.blueprint/status :public-oss
+  :itonami.blueprint/id "cloud-itonami-isco-9311"
+  :itonami.blueprint/license "AGPL-3.0-or-later"}]
