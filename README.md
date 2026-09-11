@@ -11,7 +11,7 @@ This repository designs a forkable OSS business for a mining/quarrying labor-sch
 (`mininglabor.governor`), following the itonami actor pattern
 (ADR-2607121000): `:intake -> :advise -> :govern -> :decide -+-> :commit
 (:ok?) +-> :request-approval (:escalate?, human-in-the-loop interrupt)
-+-> :hold (:hard?)`. 17 tests green (`clojure -M:test`).
++-> :hold (:hard?)`. 17 tests green (`kbb -M:test`).
 HARD invariants (always hold, never overridable): laborer provenance,
 site provenance, no-actuation (`:effect` must be `:propose`), a closed
 op-allowlist (`:log-labor-record`, `:schedule-labor-operation`,
