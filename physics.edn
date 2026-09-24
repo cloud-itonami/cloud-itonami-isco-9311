@@ -1,0 +1,36 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a labor-scheduling/logistics coordination robot
+;; performs shift scheduling, task-completion logging and safety-equipment
+;; supply-order coordination for a mining/quarrying labor crew (ISCO 9311).
+;; It never enters to mine and never authorizes blasting or area entry. Its
+;; physical work is the supplies logistics: carrying crates of safety
+;; equipment (self-rescuers, gas-detector spares) down the decline to the
+;; crew's refuge station, and keeping the sump dewatered by pumping water up
+;; to the surface.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-9311"
+ :cases
+ [{:id :safety-crates-up-decline
+   :kind :transport
+   :procedure "supply robot carries 120 kg of safety-equipment crates 300 m along the decline between the refuge station and the portal (judged on the uphill return)"
+   :params {:mass-kg 250.0 :payload-kg 120.0 :distance-m 300.0 :v-max-mps 1.5 :a-max-mps2 0.4
+            :brake-decel-mps2 0.8 :drive-force-n 1200.0 :crr 0.03
+            :cog-height-m 0.50 :support-half-length-m 0.50 :payload-cog-height-m 0.80
+            :max-time-s 3600.0}
+   :sweep {:param :slope-deg :values [0.0 4.0 8.0 12.0 16.0]}
+   :quantity :cycle-time-s
+   :limit {:max 240.0 :basis "estimate: one supply leg within the 30-minute shift-change window, allowing for loading at both ends"}
+   :boundary {:lo 0.0 :hi 25.0}}
+  {:id :sump-dewatering-lift
+   :kind :pipe-flow
+   :procedure "pump 10 L/s of sump water through 300 m of 100 mm steel rising main to the surface settling pond, sump depth varied"
+   :params {:q-m3s 0.010 :diameter-m 0.100 :length-m 300.0 :roughness-m 4.5e-5 :pump-efficiency 0.65}
+   :sweep {:param :elevation-m :values [20.0 50.0 80.0 110.0 150.0]}
+   :quantity :pump-power-w
+   :limit {:max 15000.0 :basis "estimate: shaft power of a 15 kW-class submersible drainage pump"}
+   :boundary {:lo 10.0 :hi 200.0}}]}
