@@ -1,6 +1,6 @@
 (ns mininglabor.store
   "SSoT for the ISCO-08 9311 mining and quarrying labor coordination
-  actor (itonami actor pattern, ADR-2607121000 / CLAUDE.md Actors
+  actor (itonami actor pattern, ADR-2607121000 / AGENTS.md Actors
   section; README's 'Robotics premise' — a labor-scheduling/logistics
   coordination robot performs shift scheduling, task-completion
   logging and safety-equipment procurement coordination for a
